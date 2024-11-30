@@ -1,5 +1,7 @@
 # Getting Started with Create React App
 
+WORKING Tabs are: HOME and Find Doctors
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
