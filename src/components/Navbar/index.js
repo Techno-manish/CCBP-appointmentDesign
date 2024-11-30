@@ -1,6 +1,11 @@
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
-const navItems = ["Home", "Find Doctors", "About Us"];
+const navItems = [
+  { name: "Home", route: "/" },
+  { name: "Find Doctors", route: "/find-doctor" },
+  { name: "About Us", route: "/find-doctor" },
+];
 
 const Navbar = () => (
   <NavbarContainer>
@@ -8,13 +13,17 @@ const Navbar = () => (
       <NavLogoImage src="/assets/Logo-appointmentDesign.png" alt="Logo" />
 
       <NavContainer>
-        {navItems.map((each) => (
-          <li
-            key={each}
-            style={{ color: each === "Find Doctors" ? "green" : "#000" }}
-          >
-            {each}
-          </li>
+        {navItems.map(({ name, route }) => (
+          <NavItemContainer key={name}>
+            <StyledNavLink
+              to={route}
+              activeClassName="active"
+              exact
+              style={{ color: name === "Find Doctors" ? "green" : "#000" }}
+            >
+              {name}
+            </StyledNavLink>
+          </NavItemContainer>
         ))}
       </NavContainer>
     </NavLogoLinkContainer>
@@ -30,8 +39,8 @@ export default Navbar;
 // Styled Components
 const NavbarContainer = styled.nav`
   display: flex;
-  justify-content: space-between; /* Centers the nav items horizontally */
-  padding: 1rem; /* Adds padding around the container */
+  justify-content: space-between;
+  padding: 1rem;
   background-color: #fff7e2;
 `;
 
@@ -49,7 +58,6 @@ const NavLogoImage = styled.img`
   cursor: pointer;
 `;
 
-// Navigation link styled component
 const NavContainer = styled.ul`
   display: flex;
   align-items: center;
@@ -59,10 +67,24 @@ const NavContainer = styled.ul`
   font-weight: 500;
   font-size: 1rem;
   cursor: pointer;
+`;
 
-  li:hover {
+const NavItemContainer = styled.li`
+  list-style-type: none;
+`;
+
+const StyledNavLink = styled(NavLink)`
+  color: #000;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+
+  &:hover {
     color: #3a643b;
-    font-weight: bold;
+  }
+
+  &.active {
+    color: green;
   }
 `;
 
